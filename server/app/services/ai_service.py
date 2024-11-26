@@ -1,6 +1,5 @@
 import logging
 from typing import List
-import google.generativeai as genai
 from app.models.chat import Message
 import os
 import openai
