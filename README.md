@@ -1,4 +1,4 @@
-# AI Architect: Your AI-Powered Software Design Assistant 🚀
+# AI Architect: Your Software Design Assistant 🚀
 
 ## What is AI Architect?
 AI Architect is a tool that helps you design software architecture. Asking the right questions is often more important than having immediate answers. By walking you through a series of thoughtful, strategic questions, it helps you clarify your vision, identify potential challenges, and create more robust architectural designs.
