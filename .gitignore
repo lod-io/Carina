@@ -1,0 +1,10 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
