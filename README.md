@@ -47,18 +47,16 @@ pip install -r requirements.txt
 
 #### Set Up Environment Variables
 
-1. Get your Gemini API key:
+1. Get your CLōD API key:
 
-   - Go to [Google Cloud Console](https://console.cloud.google.com)
-   - Create a new project or select an existing one
-   - Enable the Gemini API
-   - Create API credentials and copy your API key
+   - Go to [CLōD Console](https://dashboard.clod.io/api-key)
+   - Create an API key by clicking "Generate +", and copy your API key
 
-2. Create a `.env` file in the server directory:
-3. Add your Gemini API key to the `.env` file:
+2. Create a `.env` file inside the server folder:
+3. Add your CLōD API key to the `.env` file. Add quotation marks around the key if it's not already quoted:
 
 ```bash
-GOOGLE_API_KEY=[your-api-key]
+CLOD_API_KEY="[your-api-key]"
 ```
 
 ### 3. Set Up the Frontend
