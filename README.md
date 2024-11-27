@@ -23,10 +23,10 @@ Open your computer's terminal (or command prompt):
 
 ```bash
 # This downloads the project to your computer
-git clone https://github.com/lod-io/clod-mini-apps.git
+git clone https://github.com/lod-io/Carina.git
 
 # Move into the project folder
-cd clod-mini-apps
+cd Carina
 ```
 
 ### Step 2: Set Up the Backend (Python Part)
@@ -120,7 +120,7 @@ We welcome contributions from the community! If you'd like to contribute to Cari
 2. **Clone Your Fork**: Use the following command to clone your forked repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/clod-mini-apps.git
+   git clone https://github.com/your-username/Carina.git
    ```
 
 3. **Create a Branch**: Create a new branch for your feature or bug fix:
