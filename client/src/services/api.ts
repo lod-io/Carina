@@ -17,9 +17,7 @@ export const api = {
       messages: messages,
       model,
     };
-    console.log('Sending payload:', JSON.stringify(payload, null, 2));
     const response = await axios.post(`${API_BASE_URL}/chat/next-question`, payload);
-    console.log('Response:', response.data);
     return response.data;
   },
 
