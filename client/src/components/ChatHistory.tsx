@@ -30,7 +30,7 @@ function ChatHistory({ messages }: ChatHistoryProps) {
             }}
           >
             <ListItemText
-              primary={message.role === "user" ? "You" : "AI Architect"}
+              primary={message.role === "user" ? "You" : "Carina"}
               secondary={message.content}
               primaryTypographyProps={{
                 style: { color: "var(--subtitle-color)" },

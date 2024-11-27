@@ -1,8 +1,8 @@
-# AI Architect: Your Software Design Assistant 🚀
+# Carina: Your Software Design Assistant 🚀
 
-## What is AI Architect?
+## What is Carina?
 
-AI Architect is a tool that helps you design software architecture. Asking the right questions is often more important than having immediate answers. By walking you through a series of thoughtful, strategic questions, it helps you clarify your vision, identify potential challenges, and create more robust architectural designs.
+Carina is an AI-powered tool that helps you design software architecture. By walking you through a series of thoughtful, strategic questions, it helps you clarify your vision, identify potential challenges, and create more robust architectural designs. Asking the right questions is often more important than having immediate answers. The tool's name comes from the Keel constellation (Carina in Latin), which represents the strong central beam that runs along a ship's bottom to support its entire structure - much like how this tool serves as the backbone of your software design process.
 
 ## Before You Begin: What You'll Need 🛠️
 
@@ -109,11 +109,11 @@ Open your web browser and go to `http://localhost:3000`
 
 ## License
 
-AI Architect is released under the MIT License. You are free to use, modify, and distribute the code for both commercial and non-commercial purposes.
+Carina is released under the MIT License. You are free to use, modify, and distribute the code for both commercial and non-commercial purposes.
 
 ## Contributions 🤝
 
-We welcome contributions from the community! If you'd like to contribute to AI Architect, please follow these steps:
+We welcome contributions from the community! If you'd like to contribute to Carina, please follow these steps:
 
 1. **Fork the Repository**: Click the "Fork" button at the top of this page to create a copy of the repository under your GitHub account.
 
@@ -145,7 +145,7 @@ We welcome contributions from the community! If you'd like to contribute to AI A
 
 7. **Submit a Pull Request**: Go to the original repository and click "New Pull Request". Provide a clear description of your changes and why they should be merged.
 
-Thank you for your contributions! Together, we can make AI Architect even better.
+Thank you for your contributions! Together, we can make Carina even better.
 
 ## Troubleshooting 🛠️
 

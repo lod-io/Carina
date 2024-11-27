@@ -17,7 +17,7 @@ import ModelPicker from "./components/ModelPicker";
 function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      role: "AI Architect",
+      role: "Carina",
       content:
         "Please describe the system you want to build and its key functionalities.",
     },
@@ -54,7 +54,7 @@ function App() {
       const response = await api.getNextQuestion(newMessages, model);
       setMessages([
         ...newMessages,
-        { role: "AI Architect", content: response.content },
+        { role: "Carina", content: response.content },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -84,7 +84,7 @@ function App() {
           component="h1"
           sx={{ color: "var(--text-color)" }}
         >
-          AI Architect
+          Carina
         </Typography>
 
         <ModelPicker onModelSelect={handleModelSelect} />
@@ -145,7 +145,7 @@ function App() {
               disabled={loading || messages.length < 4}
               sx={{ textTransform: "none" }}
             >
-              {designDoc ? "Recreate Design" : "Create Design"}
+              {designDoc ? "Regenerate Design" : "Generate Design"}
             </Button>
             {loading && <CircularProgress size={24} />}
             <Button
