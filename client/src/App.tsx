@@ -12,6 +12,7 @@ import { Message, api } from "./services/api";
 import "./styles/App.css";
 import ChatHistory from "./components/ChatHistory";
 import DesignDoc from "./components/DesignDoc";
+import ModelPicker from "./components/ModelPicker";
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([
@@ -26,6 +27,7 @@ function App() {
   const [designDoc, setDesignDoc] = useState<string>("");
   const [showDesignModal, setShowDesignModal] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [model, setModel] = useState("gemini-1.5-flash");
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -33,6 +35,11 @@ function App() {
         chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const handleModelSelect = (model: string) => {
+    console.log("Model selected:", model);
+    setModel(model);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +51,10 @@ function App() {
       setMessages(newMessages);
       setInput("");
 
-      const question = await api.getNextQuestion(newMessages);
+      const response = await api.getNextQuestion(newMessages, model);
       setMessages([
         ...newMessages,
-        { role: "AI Architect", content: question },
+        { role: "AI Architect", content: response.content },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -59,7 +66,7 @@ function App() {
   const handleGenerateDesign = async () => {
     setLoading(true);
     try {
-      const response = await api.generateDesign(messages);
+      const response = await api.generateDesign(messages, model);
       setDesignDoc(response.content);
       setShowDesignModal(true);
     } catch (error) {
@@ -71,14 +78,17 @@ function App() {
 
   return (
     <Container maxWidth="md" className="app-container">
-      <Typography
-        variant="h4"
-        component="h1"
-        sx={{ color: "var(--text-color)" }}
-        gutterBottom
-      >
-        AI Architect
-      </Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{ color: "var(--text-color)" }}
+        >
+          AI Architect
+        </Typography>
+
+        <ModelPicker onModelSelect={handleModelSelect} />
+      </Box>
 
       <Paper elevation={3} className="app-chat-container">
         <Box

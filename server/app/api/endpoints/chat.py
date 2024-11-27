@@ -1,16 +1,17 @@
 from fastapi import APIRouter, HTTPException, Depends
-from app.models.chat import ChatHistory
+from app.models.chat import ChatRequest, ChatResponse
 from app.services.ai_service import AIService
 
 router = APIRouter()
 
 
-@router.post("/chat/next-question")
+@router.post("/next-question", response_model=ChatResponse)
 async def get_next_question(
-    chat_history: ChatHistory,
-    ai_service: AIService = Depends()
-) -> str:
+    request: ChatRequest,
+    ai_service: AIService = Depends(),
+) -> ChatResponse:
     try:
-        return await ai_service.generate_question(chat_history.messages)
+        content = await ai_service.generate_question(request.messages, request.model)
+        return ChatResponse(content=content)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

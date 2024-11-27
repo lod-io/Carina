@@ -5,6 +5,7 @@ from .chat import Message
 
 class DesignRequest(BaseModel):
     messages: List[Message]
+    model: str
 
 
 class DesignResponse(BaseModel):

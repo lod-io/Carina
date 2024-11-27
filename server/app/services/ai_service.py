@@ -18,7 +18,10 @@ class AIService:
             base_url="https://api.clod.io/v1",
         )
 
-    async def generate_question(self, messages: List[Message]) -> str:
+    async def generate_question(self, messages: List[Message], model: str) -> str:
+
+        print("Generating question with model:", model)
+
         try:
             history = self._format_messages(messages)
             prompt = f"""Based on the previous context:
@@ -26,7 +29,7 @@ class AIService:
             Generate a concise, high-level question to further clarify the software architecture."""
 
             response = self.client.chat.completions.create(
-                model="gemini-1.5-flash",
+                model=model,
                 messages=[{"role": "user", "content": prompt}],
             )
 
@@ -38,7 +41,10 @@ class AIService:
             print(error_msg)
             return error_msg
 
-    async def generate_design_doc(self, messages: List[Message]) -> str:
+    async def generate_design_doc(self, messages: List[Message], model: str) -> str:
+
+        print("Generating design document with model:", model)
+
         if not messages:
             error_msg = "No messages provided for design document generation"
             logger.error(error_msg)
@@ -60,7 +66,7 @@ class AIService:
             Be comprehensive and detailed."""
 
             response = self.client.chat.completions.create(
-                model="gemini-1.5-flash",
+                model=model,
                 messages=[{"role": "user", "content": design_prompt}],
             )
 

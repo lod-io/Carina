@@ -12,17 +12,24 @@ export interface ChatHistory {
 }
 
 export const api = {
-  async getNextQuestion(messages: Message[]): Promise<string> {
-    const response = await axios.post(`${API_BASE_URL}/chat/chat/next-question`, {
-      messages,
-    });
-    console.log(response.data);
+  async getNextQuestion(messages: Message[], model: string): Promise<{ content: string }> {
+    const payload = {
+      messages: messages,
+      model,
+    };
+    console.log('Sending payload:', JSON.stringify(payload, null, 2));
+    const response = await axios.post(`${API_BASE_URL}/chat/next-question`, payload);
+    console.log('Response:', response.data);
     return response.data;
   },
 
-  async generateDesign(messages: Message[]): Promise<{ content: string }> {
+  async generateDesign(
+    messages: Message[],
+    model: string
+  ): Promise<{ content: string }> {
     const response = await axios.post(`${API_BASE_URL}/design/generate`, {
-      messages,
+      messages: messages,
+      model: model,
     });
     console.log(response.data);
     return response.data;
