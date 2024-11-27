@@ -111,30 +111,6 @@ Open your web browser and go to `http://localhost:3000`
 
 AI Architect is released under the MIT License. You are free to use, modify, and distribute the code for both commercial and non-commercial purposes.
 
-## Troubleshooting 🛠️
-
-### Common Issues and Solutions
-
-- **Module Not Found Error**
-
-  - Make sure you've activated the virtual environment
-  - Confirm all requirements are installed
-
-- **Backend Won't Start**
-
-  - Double-check your `.env` file
-  - Ensure your API key is correct and properly formatted
-
-- **Frontend Fails**
-  - Verify all npm dependencies are installed
-  - Check for any error messages in the terminal
-
-## Pro Tips 💡
-
-- Always keep your virtual environment activated when working on the project
-- If you close your terminal, reactivate the virtual environment
-- Don't share your API key publicly
-
 ## Contributions 🤝
 
 We welcome contributions from the community! If you'd like to contribute to AI Architect, please follow these steps:
@@ -170,5 +146,29 @@ We welcome contributions from the community! If you'd like to contribute to AI A
 7. **Submit a Pull Request**: Go to the original repository and click "New Pull Request". Provide a clear description of your changes and why they should be merged.
 
 Thank you for your contributions! Together, we can make AI Architect even better.
+
+## Troubleshooting 🛠️
+
+### Common Issues and Solutions
+
+- **Module Not Found Error**
+
+  - Make sure you've activated the virtual environment
+  - Confirm all requirements are installed
+
+- **Backend Won't Start**
+
+  - Double-check your `.env` file
+  - Ensure your API key is correct and properly formatted
+
+- **Frontend Fails**
+  - Verify all npm dependencies are installed
+  - Check for any error messages in the terminal
+
+## Pro Tips 💡
+
+- Always keep your virtual environment activated when working on the project
+- If you close your terminal, reactivate the virtual environment
+- Don't share your API key publicly
 
 Happy Coding! 👩‍💻👨‍💻
