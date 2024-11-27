@@ -1,4 +1,4 @@
-# Carina: Your Software Design Assistant 🚀
+# Carina: Your Software Architect 🚀
 
 ## What is Carina?
 
@@ -19,15 +19,30 @@ If you're new to programming, don't panic! This guide will walk you through ever
 
 ### Step 1: Download the Project
 
-Open your computer's terminal (or command prompt):
+A directory is just another word for a folder on your computer. Before downloading the project, you'll need to choose which folder you want to store it in.
+
+1. Open your terminal (also called Command Prompt on Windows)
+2. Navigate to the folder where you want to store the project using these commands:
 
 ```bash
-# This downloads the project to your computer
+# For example, to go to your Downloads folder:
+cd ~/Downloads    # Mac/Linux
+# or
+cd C:\Users\YourUsername\Downloads    # Windows
+
+# Not sure which folder you're in? You can check by typing:
+pwd    # Mac/Linux
+# or
+cd     # Windows
+
+# Once you're in the right folder, run this command to download the project:
 git clone https://github.com/lod-io/Carina.git
 
-# Move into the project folder
+# This will create a new folder named 'Carina'. Let's move into it:
 cd Carina
 ```
+
+Note: Replace `YourUsername` with your actual Windows username. For example, if your username is "John", you would type: `cd C:\Users\John\Documents`
 
 ### Step 2: Set Up the Backend (Python Part)
 
@@ -36,6 +51,8 @@ cd Carina
 A virtual environment is like a special room for your project's Python packages. It keeps everything organized!
 
 ```bash
+# Note: If 'python' command doesn't work, use 'python3' instead for all Python commands
+
 # Go to the server folder
 cd server
 
@@ -43,11 +60,9 @@ cd server
 python -m venv venv
 
 # Activate the virtual environment
-# For Mac/Linux:
-source venv/bin/activate
-
-# For Windows:
-venv\Scripts\activate
+source venv/bin/activate    # Mac/Linux
+# or
+venv\Scripts\activate    # Windows
 ```
 
 #### Install Required Packages
@@ -60,16 +75,27 @@ pip install -r requirements.txt
 #### Get Your API Key
 
 1. Visit [CLōD Console](https://dashboard.clod.io/api-key)
-2. Click "Generate +" to create a new API key
-3. Copy your API key
+2. Sign up for a free account
+3. Under "API Keys", click "Generate +" to create a new API key
+4. Copy your API key
 
 #### Create an Environment File
 
 Create a file named `.env` in the `server` folder and add your API key:
 
 ```bash
+# Create and open the .env file in your default text editor
+touch .env
+nano .env
+```
+
+Type or paste the following into the file:
+
+```bash
 CLOD_API_KEY="[your-api-key]"
 ```
+
+Save the file by pressing `Ctrl + X`, then `Y`, then `Enter`.
 
 ### Step 3: Set Up the Frontend (Web Interface)
 
@@ -85,23 +111,44 @@ npm install
 
 ### Start the Backend Server
 
-```bash
-# Go back to the server folder
-cd ../server
+1. **Navigate to the Server Folder**:
 
-# Launch the backend
-python3 main.py
-```
+   ```bash
+   cd ../server
+   ```
+
+2. **Launch the Backend**:
+
+   ```bash
+   python3 main.py
+   ```
+
+   Leave this terminal window open to keep the backend running.
 
 ### Start the Frontend
 
-```bash
-# Go to the client folder
-cd ../client
+1. **Open a New Terminal Window**: You need a separate terminal to run the frontend.
 
-# Start the web interface
-npm start
-```
+2. **Navigate to the Client Folder**:
+
+   ```bash
+   # If you're starting from the project root folder:
+   cd client
+
+   # If you're starting from anywhere else:
+   cd path/to/Carina/client
+
+   # For example, if you're in the server folder:
+   cd ../client
+   ```
+
+3. **Start the Web Interface**:
+
+   ```bash
+   npm start
+   ```
+
+   This will launch the frontend, and you can access the application in your web browser at `http://localhost:3000`.
 
 ## How to Use the Application
 
