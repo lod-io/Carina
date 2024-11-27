@@ -51,13 +51,12 @@ Note: Replace `YourUsername` with your actual Windows username. For example, if 
 A virtual environment is like a special room for your project's Python packages. It keeps everything organized!
 
 ```bash
-# Note: If 'python' command doesn't work, use 'python3' instead for all Python commands
 
 # Go to the server folder
 cd server
 
 # Create a virtual environment
-python -m venv venv
+python3 -m venv venv
 
 # Activate the virtual environment
 source venv/bin/activate    # Mac/Linux
