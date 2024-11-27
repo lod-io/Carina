@@ -36,16 +36,29 @@ function DesignDoc({ open, onClose, designDoc }: DesignDocProps) {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Generated Design Document</DialogTitle>
-      <DialogContent sx={{ whiteSpace: "pre-wrap" }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      sx={{
+        "& .MuiBackdrop-root": {
+          backgroundColor: "transparent",
+        },
+      }}
+    >
+      <DialogContent sx={{ backgroundColor: "var(--dialog-color)" }}>
         <div className="design-doc-markdown-content">
           <ReactMarkdown>{designDoc}</ReactMarkdown>
         </div>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleSave}>Save</Button>
-        <Button onClick={onClose}>Close</Button>
+      <DialogActions sx={{ backgroundColor: "var(--ai-chat-color)" }}>
+        <Button onClick={handleSave} sx={{ textTransform: "none" }}>
+          Save
+        </Button>
+        <Button onClick={onClose} sx={{ textTransform: "none" }}>
+          Close
+        </Button>
       </DialogActions>
     </Dialog>
   );

@@ -8,6 +8,8 @@
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
+  height: 75vh;
+  background-color: var(--paper-color);
 }
 
 .app-chat-container form {

@@ -21,7 +21,10 @@ function ChatHistory({ messages }: ChatHistoryProps) {
           <Box
             sx={{
               maxWidth: "70%",
-              backgroundColor: message.role === "user" ? "#606060" : "#353535",
+              backgroundColor:
+                message.role === "user"
+                  ? "var(--user-chat-color)"
+                  : "var(--ai-chat-color)",
               borderRadius: "8px",
               padding: "8px 16px",
             }}
@@ -30,10 +33,10 @@ function ChatHistory({ messages }: ChatHistoryProps) {
               primary={message.role === "user" ? "You" : "AI Architect"}
               secondary={message.content}
               primaryTypographyProps={{
-                style: { color: "#a2a2a2" },
+                style: { color: "var(--subtitle-color)" },
               }}
               secondaryTypographyProps={{
-                style: { color: "#f2f2f2" },
+                style: { color: "var(--text-color)" },
               }}
             />
           </Box>

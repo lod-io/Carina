@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   Paper,
@@ -25,6 +25,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [designDoc, setDesignDoc] = useState<string>("");
   const [showDesignModal, setShowDesignModal] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,18 +74,23 @@ function App() {
       <Typography
         variant="h4"
         component="h1"
-        sx={{ color: "#f5f5f5" }}
+        sx={{ color: "var(--text-color)" }}
         gutterBottom
       >
         AI Architect
       </Typography>
 
-      <Paper
-        elevation={3}
-        className="app-chat-container"
-        sx={{ backgroundColor: "#131313" }}
-      >
-        <ChatHistory messages={messages} />
+      <Paper elevation={3} className="app-chat-container">
+        <Box
+          ref={chatContainerRef}
+          mb={2}
+          sx={{
+            height: "100%",
+            overflowY: "auto",
+          }}
+        >
+          <ChatHistory messages={messages} />
+        </Box>
 
         <form onSubmit={handleSubmit}>
           <TextField
@@ -93,15 +106,15 @@ function App() {
               "& .MuiOutlinedInput-root": {
                 color: "#f2f2f2",
                 "& fieldset": {
-                  borderColor: "#353535",
+                  borderColor: "var(--accent-color)",
                 },
                 "&:hover fieldset": {
-                  borderColor: "#353535",
+                  borderColor: "var(--accent-color)",
                 },
               },
               "& .MuiInputBase-input::placeholder": {
-                color: "#606060",
-                opacity: 0.7,
+                color: "var(--placeholder-color)",
+                opacity: 1.0,
               },
             }}
           />
@@ -111,6 +124,7 @@ function App() {
               variant="contained"
               color="primary"
               disabled={loading || !input.trim()}
+              sx={{ textTransform: "none" }}
             >
               Send
             </Button>
@@ -119,10 +133,23 @@ function App() {
               color="secondary"
               onClick={handleGenerateDesign}
               disabled={loading || messages.length < 4}
+              sx={{ textTransform: "none" }}
             >
-              Generate Design Doc
+              {designDoc ? "Recreate Design" : "Create Design"}
             </Button>
             {loading && <CircularProgress size={24} />}
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => setShowDesignModal(!showDesignModal)}
+              sx={{
+                textTransform: "none",
+                marginLeft: "auto",
+              }}
+              disabled={!designDoc}
+            >
+              Show Design
+            </Button>
           </Box>
         </form>
       </Paper>

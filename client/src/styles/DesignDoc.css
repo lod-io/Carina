@@ -1,5 +1,6 @@
 .design-doc-markdown-content {
   padding: 1rem;
+  color: var(--text-color);
 }
 
 .design-doc-markdown-content pre {
