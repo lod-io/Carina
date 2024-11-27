@@ -95,6 +95,9 @@ npm start
 ## How to Use the Application
 Open your web browser and go to `http://localhost:3000`
 
+## License
+AI Architect is released under the MIT License. You are free to use, modify, and distribute the code for both commercial and non-commercial purposes.
+
 ## Troubleshooting 🛠️
 
 ### Common Issues and Solutions
