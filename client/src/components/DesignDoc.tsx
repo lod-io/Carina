@@ -16,21 +16,18 @@ interface DesignDocProps {
 
 function DesignDoc({ open, onClose, designDoc }: DesignDocProps) {
   const handleSave = () => {
-    // Create a Blob with the design doc content
     const blob = new Blob([designDoc], {
-      type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      type: "text/markdown;charset=utf-8",
     });
-    // Create a download link
+
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "design-document.docx";
+    link.download = "ai-architect.md";
 
-    // Trigger download
     document.body.appendChild(link);
     link.click();
 
-    // Cleanup
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
   };

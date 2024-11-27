@@ -30,7 +30,7 @@ class AIService:
 
             response = self.client.chat.completions.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[{"role": "user", "content": prompt}]
             )
 
             text = response.choices[0].message.content
