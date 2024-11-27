@@ -23,7 +23,7 @@ function DesignDoc({ open, onClose, designDoc }: DesignDocProps) {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "ai-architect.md";
+    link.download = "carina-design.md";
 
     document.body.appendChild(link);
     link.click();
