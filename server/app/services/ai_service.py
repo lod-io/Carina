@@ -12,9 +12,15 @@ load_dotenv()
 
 class AIService:
     def __init__(self):
+        api_key = os.getenv("CLOD_API_KEY")
+        if not api_key:
+            raise ValueError("CLOD_API_KEY environment variable is not set")
+
+        # Only print first 5 chars for security
+        print(f"API Key found: {api_key[:5]}...")
 
         self.client = openai.Client(
-            api_key=os.getenv("CLOD_API_KEY"),
+            api_key=api_key,
             base_url="https://api.clod.io/v1",
         )
 
