@@ -9,11 +9,7 @@ app = FastAPI(
 
 # Get environment variables with defaults
 PORT = int(os.getenv("PORT", 8000))
-ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://carina-jx69.onrender.com",
-    "https://carina-server.onrender.com"
-]
+ALLOWED_ORIGINS = ["*"]
 
 # Configure CORS
 app.add_middleware(
