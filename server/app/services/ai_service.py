@@ -105,20 +105,23 @@ class AIService:
 
     async def generate_question(self, messages: List[Message], model: str) -> str:
         print("Generating question with model:", model)
+        print(f"Using base URL: {self.client.base_url}")
 
         try:
             formatted_messages = [msg.model_dump() for msg in messages]
             formatted_messages.insert(0, self.question_system_message)
 
+            print("Making API request with formatted messages...")
             response = self.client.chat.completions.create(
                 model=model,
                 messages=formatted_messages
             )
+            print("API request successful")
 
             return response.choices[0].message.content
         except Exception as e:
             error_msg = f"Error generating question: {str(e)}"
-            print(error_msg)
+            print(f"Detailed error: {repr(e)}")
             return error_msg
 
     async def generate_design_doc(self, prev_design: str | None, messages: List[Message], model: str) -> str:
