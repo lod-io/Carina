@@ -13,6 +13,7 @@ import "./styles/App.css";
 import ChatHistory from "./components/ChatHistory";
 import DesignDoc from "./components/DesignDoc";
 import ModelPicker from "./components/ModelPicker";
+import logo from "./assets/carina-logo.png";
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([
@@ -79,13 +80,11 @@ function App() {
   return (
     <Container maxWidth="md" className="app-container">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{ color: "var(--text-color)" }}
-        >
-          Carina
-        </Typography>
+        <img
+          src={logo}
+          alt="Carina Logo"
+          style={{ height: "50px", padding: "0", margin: "0" }}
+        />
 
         <ModelPicker onModelSelect={handleModelSelect} />
       </Box>
