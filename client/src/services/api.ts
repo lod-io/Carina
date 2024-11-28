@@ -17,7 +17,9 @@ export const api = {
       messages: messages,
       model,
     };
-    const response = await axios.post(`${API_BASE_URL}/chat/next-question`, payload);
+    const response = await axios.post(`${API_BASE_URL}/chat/next-question`, payload, {
+      withCredentials: true,
+    });
     return response.data;
   },
 
@@ -30,6 +32,8 @@ export const api = {
       prev_design: prev_design,
       messages: messages,
       model: model,
+    }, {
+      withCredentials: true,
     });
     console.log(response.data);
     return response.data;
