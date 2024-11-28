@@ -11,7 +11,8 @@ app = FastAPI(
 PORT = int(os.getenv("PORT", 8000))
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://carina-jx69.onrender.com"
+    "https://carina-jx69.onrender.com",
+    "https://carina-server.onrender.com"
 ]
 
 # Configure CORS
