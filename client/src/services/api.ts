@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:8000';
 
 export interface Message {
-  role: string;
+  role: "user" | "assistant";
   content: string;
 }
 
@@ -22,10 +22,12 @@ export const api = {
   },
 
   async generateDesign(
+    prev_design: string | null,
     messages: Message[],
     model: string
   ): Promise<{ content: string }> {
     const response = await axios.post(`${API_BASE_URL}/design/generate`, {
+      prev_design: prev_design,
       messages: messages,
       model: model,
     });

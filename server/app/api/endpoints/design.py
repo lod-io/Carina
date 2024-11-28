@@ -11,7 +11,9 @@ async def generate_design(
     ai_service: AIService = Depends(),
 ) -> DesignResponse:
     try:
-        content = await ai_service.generate_design_doc(request.messages, request.model)
+        content = await ai_service.generate_design_doc(
+            request.prev_design, request.messages, request.model
+        )
         return DesignResponse(content=content)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

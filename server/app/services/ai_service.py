@@ -18,31 +18,104 @@ class AIService:
             base_url="https://api.clod.io/v1",
         )
 
-    async def generate_question(self, messages: List[Message], model: str) -> str:
+        # Define system messages for different functions
+        self.question_system_message = {
+            "role": "system",
+            "content": """You are an AI software architect assistant. Your role is to ask ONE 
+            concise, high-level question that helps build a complete picture of the software architecture. 
+            Focus on different aspects of the system:
+            - Core functionality and business goals
+            - System boundaries and components
+            - Integration points and external systems
+            - Data flow and storage
+            - Non-functional requirements
+            - Technology stack
 
+            Important rules:
+            1. Ask exactly ONE simple question about ONE topic
+            2. Never combine multiple concerns into a single question, even if they seem related
+            3. Never repeat a question that was already asked
+            4. Rotate between different architectural aspects rather than diving deep into one topic
+            5. If a question can be split into multiple parts, it should be
+            6. Review the conversation history to maintain a balanced exploration of the system
+
+            Example good questions:
+            - "What are the core business problems this system aims to solve?"
+            - "What is the expected user load for the system?"
+            - "Which programming language will be used for the backend?"
+            - "What type of data needs to be stored in the system?"
+            - "What is the main user interaction flow?"
+
+            What makes these questions good:
+            - Focus on exactly ONE topic
+            - Can be answered without having to break down the question
+            - Clear and specific scope
+            - No compound elements (no "and" or multiple parts)
+
+            Example bad questions:
+            - "What is the anticipated volume of data and how will it affect scalability?"
+            - "What technology stack and database will be used?"
+            - "How will the system handle user input and process it with the LLM?"
+            - "What are the performance requirements and expected load?"
+
+            What makes these questions bad:
+            - Include multiple questions disguised as one
+            - Mix related but separate concerns
+            - Force the answerer to address multiple aspects
+            - Use "and" to combine topics
+
+            Remember: If you're tempted to use "and" in your question, it probably needs to be split into multiple separate questions."""
+        }
+
+        self.design_system_message = {
+            "role": "system",
+            "content": """You are an AI Software Architect. Your role is to create concise but comprehensive 
+            software architecture design documents. Focus on these key sections:
+
+            1. System Overview
+               - Core functionality and goals
+               - High-level architecture style
+
+            2. Key Components
+               - Main components and their responsibilities
+               - How components interact with each other
+               - Dependencies between components
+
+            3. Data Architecture
+               - Data storage solutions
+               - Data flow and state management
+
+            4. Technical Decisions
+               - Key technology choices
+               - Trade-offs and rationale
+
+            5. Open Questions
+               - Critical decisions that need to be made
+               - Key architectural concerns to address
+               - Important trade-offs to consider   
+            
+            Keep each section brief but informative. Focus on architectural decisions rather than implementation details."""
+        }
+
+    async def generate_question(self, messages: List[Message], model: str) -> str:
         print("Generating question with model:", model)
 
         try:
-            history = self._format_messages(messages)
-            prompt = f"""Based on the previous context:
-            {history}
-            Generate a concise, high-level question to further clarify the software architecture."""
+            formatted_messages = [msg.model_dump() for msg in messages]
+            formatted_messages.insert(0, self.question_system_message)
 
             response = self.client.chat.completions.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}]
+                messages=formatted_messages
             )
 
-            text = response.choices[0].message.content
-
-            return text
+            return response.choices[0].message.content
         except Exception as e:
             error_msg = f"Error generating question: {str(e)}"
             print(error_msg)
             return error_msg
 
-    async def generate_design_doc(self, messages: List[Message], model: str) -> str:
-
+    async def generate_design_doc(self, prev_design: str | None, messages: List[Message], model: str) -> str:
         print("Generating design document with model:", model)
 
         if not messages:
@@ -51,27 +124,26 @@ class AIService:
             raise ValueError(error_msg)
 
         try:
-            history = self._format_messages(messages)
-            design_prompt = f"""You are the AI Architect. Based on the following conversation history about the software architecture:
+            formatted_messages = [msg.model_dump() for msg in messages]
 
-            {history}
+            formatted_messages.insert(0, self.design_system_message)
 
-            Create a professional, structured software architecture design document that includes:
-            1. System Architecture Diagram
-            2. Component Descriptions
-            3. Communication and Interactions
-            4. Technology Choices and Rationale
-            5. Open Questions
+            if prev_design:
+                print("Previous design provided")
+                formatted_messages.insert(1, {
+                    "role": "assistant",
+                    "content": f"""Here is the previous version of the design document that should be used as a foundation.
+                    Maintain its core structure while incorporating new information from the conversation:
 
-            Be comprehensive and detailed."""
+                    {prev_design}"""
+                })
 
             response = self.client.chat.completions.create(
                 model=model,
-                messages=[{"role": "user", "content": design_prompt}],
+                messages=formatted_messages
             )
 
             text = response.choices[0].message.content
-
             if not text:
                 error_msg = "Failed to generate design document: Empty response from AI service"
                 logger.error(error_msg)

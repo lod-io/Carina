@@ -18,7 +18,7 @@ import logo from "./assets/carina-logo.png";
 function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      role: "Carina",
+      role: "assistant",
       content:
         "Please describe the system you want to build and its key functionalities.",
     },
@@ -48,14 +48,17 @@ function App() {
 
     setLoading(true);
     try {
-      const newMessages = [...messages, { role: "user", content: input }];
+      const newMessages = [
+        ...messages,
+        { role: "user", content: input } as Message,
+      ];
       setMessages(newMessages);
       setInput("");
 
       const response = await api.getNextQuestion(newMessages, model);
       setMessages([
         ...newMessages,
-        { role: "Carina", content: response.content },
+        { role: "assistant", content: response.content },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -67,7 +70,11 @@ function App() {
   const handleGenerateDesign = async () => {
     setLoading(true);
     try {
-      const response = await api.generateDesign(messages, model);
+      const response = await api.generateDesign(
+        designDoc !== "" ? designDoc : null,
+        messages,
+        model
+      );
       setDesignDoc(response.content);
       setShowDesignModal(true);
     } catch (error) {
@@ -83,7 +90,7 @@ function App() {
         <img
           src={logo}
           alt="Carina Logo"
-          style={{ height: "50px", padding: "0", margin: "0" }}
+          style={{ height: "60px", padding: "0", margin: "0" }}
         />
 
         <ModelPicker onModelSelect={handleModelSelect} />

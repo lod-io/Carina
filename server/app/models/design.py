@@ -4,6 +4,7 @@ from .chat import Message
 
 
 class DesignRequest(BaseModel):
+    prev_design: str | None
     messages: List[Message]
     model: str
 
