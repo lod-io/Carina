@@ -12,15 +12,9 @@ load_dotenv()
 
 class AIService:
     def __init__(self):
-        api_key = os.getenv("CLOD_API_KEY")
-        if not api_key:
-            raise ValueError("CLOD_API_KEY environment variable is not set")
-
-        # Only print first 5 chars for security
-        print(f"API Key found: {api_key[:5]}...")
 
         self.client = openai.Client(
-            api_key=api_key,
+            api_key=os.getenv("CLOD_API_KEY"),
             base_url="https://api.clod.io/v1",
         )
 
@@ -105,23 +99,20 @@ class AIService:
 
     async def generate_question(self, messages: List[Message], model: str) -> str:
         print("Generating question with model:", model)
-        print(f"Using base URL: {self.client.base_url}")
 
         try:
             formatted_messages = [msg.model_dump() for msg in messages]
             formatted_messages.insert(0, self.question_system_message)
 
-            print("Making API request with formatted messages...")
             response = self.client.chat.completions.create(
                 model=model,
                 messages=formatted_messages
             )
-            print("API request successful")
 
             return response.choices[0].message.content
         except Exception as e:
             error_msg = f"Error generating question: {str(e)}"
-            print(f"Detailed error: {repr(e)}")
+            print(error_msg)
             return error_msg
 
     async def generate_design_doc(self, prev_design: str | None, messages: List[Message], model: str) -> str:

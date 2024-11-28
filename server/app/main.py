@@ -9,14 +9,12 @@ app = FastAPI(
 
 # Get environment variables with defaults
 PORT = int(os.getenv("PORT", 8000))
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://carina-jx69.onrender.com",
-        "http://localhost:3000",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=[
