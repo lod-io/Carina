@@ -8,8 +8,8 @@ Carina is an AI-powered tool that helps you design software architecture. By wal
 
 ### Technical Requirements
 
-- **Python**: Version 3.8 or higher
-- **Node.js and npm**: These help run the frontend of your application
+- **[Python](https://www.python.org/downloads/)**: Version 3.8 or higher
+- **[Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)**: These help run the frontend of your application
 
 ### Beginner's Tip 💡
 
