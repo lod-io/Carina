@@ -13,6 +13,11 @@ load_dotenv()
 class AIService:
     def __init__(self):
 
+        # Whether the design document should be iterated on or not
+        # In the case the user taps generate design document multiple times without adding new information,
+        # the behaviour should be to not iterate on the design document, but rather create a new one from scratch
+        self.shouldIterateDesign = False
+
         self.client = openai.Client(
             api_key=os.getenv("CLOD_API_KEY"),
             base_url="https://api.clod.io/v1",
@@ -100,6 +105,8 @@ class AIService:
     async def generate_question(self, messages: List[Message], model: str) -> str:
         print("Generating question with model:", model)
 
+        self.shouldIterateDesign = True
+
         try:
             formatted_messages = [msg.model_dump() for msg in messages]
             formatted_messages.insert(0, self.question_system_message)
@@ -128,8 +135,7 @@ class AIService:
 
             formatted_messages.insert(0, self.design_system_message)
 
-            if prev_design:
-                print("Previous design provided")
+            if prev_design and self.shouldIterateDesign:
                 formatted_messages.insert(1, {
                     "role": "assistant",
                     "content": f"""Here is the previous version of the design document that should be used as a foundation.
@@ -137,6 +143,7 @@ class AIService:
 
                     {prev_design}"""
                 })
+                self.shouldIterateDesign = False
 
             response = self.client.chat.completions.create(
                 model=model,

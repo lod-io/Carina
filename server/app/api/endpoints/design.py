@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from app.models.design import DesignRequest, DesignResponse
 from app.services.ai_service import AIService
+from app.dependencies import get_ai_service
 
 router = APIRouter()
 
@@ -8,7 +9,7 @@ router = APIRouter()
 @router.post("/generate", response_model=DesignResponse)
 async def generate_design(
     request: DesignRequest,
-    ai_service: AIService = Depends(),
+    ai_service: AIService = Depends(get_ai_service),
 ) -> DesignResponse:
     try:
         content = await ai_service.generate_design_doc(
